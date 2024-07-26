@@ -2,13 +2,13 @@
 *.pyc
 *.pyo
 *.pyd
-.exe
 __pycache__/
 
 # Build artifacts
 build/
 dist/
 *.egg-info/
+.exe
 
 # Virtual environment
 venv/
