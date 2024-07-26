@@ -1,9 +1,6 @@
 #ifndef THERMO_H
 #define THERMO_H
 
-#define REFR_R410A   (1)
-#define REFR_R32     (2)
-#define REFR_R290    (3)
 # include <stdint.h>
 
 /**
