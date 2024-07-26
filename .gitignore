@@ -2,6 +2,7 @@
 *.pyc
 *.pyo
 *.pyd
+.exe
 __pycache__/
 
 # Build artifacts
@@ -20,5 +21,4 @@ env/
 .idea/
 .vscode/
 .venv/
-
 ```

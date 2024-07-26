@@ -1,0 +1,52 @@
+Evap Model:                             OLS Regression Results                            
+==============================================================================
+Dep. Variable:                dH_evap   R-squared:                       0.993
+Model:                            OLS   Adj. R-squared:                  0.993
+Method:                 Least Squares   F-statistic:                 1.259e+04
+Date:                Thu, 25 Jul 2024   Prob (F-statistic):          4.05e-200
+Time:                        12:15:50   Log-Likelihood:                -1746.9
+No. Observations:                 190   AIC:                             3500.
+Df Residuals:                     187   BIC:                             3509.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept   2.217e+05    366.812    604.287      0.000    2.21e+05    2.22e+05
+T_e          222.6104     11.683     19.055      0.000     199.564     245.657
+T_c        -1705.3608     11.683   -145.974      0.000   -1728.407   -1682.314
+==============================================================================
+Omnibus:                       43.977   Durbin-Watson:                   0.172
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               72.676
+Skew:                          -1.211   Prob(JB):                     1.65e-16
+Kurtosis:                       4.822   Cond. No.                         72.5
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+Cond Model:                             OLS Regression Results                            
+==============================================================================
+Dep. Variable:                dH_cond   R-squared:                       0.988
+Model:                            OLS   Adj. R-squared:                  0.988
+Method:                 Least Squares   F-statistic:                     7756.
+Date:                Thu, 25 Jul 2024   Prob (F-statistic):          1.27e-180
+Time:                        12:15:50   Log-Likelihood:                -1769.1
+No. Observations:                 190   AIC:                             3544.
+Df Residuals:                     187   BIC:                             3554.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept   2.227e+05    412.339    540.149      0.000    2.22e+05    2.24e+05
+T_e         -941.2598     13.133    -71.674      0.000    -967.167    -915.353
+T_c         -687.7772     13.133    -52.372      0.000    -713.684    -661.870
+==============================================================================
+Omnibus:                       22.511   Durbin-Watson:                   0.619
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               27.014
+Skew:                          -0.912   Prob(JB):                     1.36e-06
+Kurtosis:                       3.293   Cond. No.                         72.5
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
