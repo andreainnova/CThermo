@@ -1,8 +1,8 @@
 #ifndef THERMO_H
 #define THERMO_H
 
-# include <stdint.h>
-
+// # include <stdint.h>
+#include "stdtypes.h"
 /**
  * @brief Prints the current refrigerant being used.
  */
@@ -14,7 +14,7 @@ void print_refrigerant(void);
  * @param pressure Saturation pressure [mbar].
  * @return Saturation temperature [0.1°C].
  */
-int16_t pressure_to_temperature(const uint16_t pressure);
+s16 pressure_to_temperature(const u16 pressure);
 
 /**
  * @brief Convert saturation temperature to pressure.
@@ -22,7 +22,7 @@ int16_t pressure_to_temperature(const uint16_t pressure);
  * @param temperature Saturation temperature [0.1°C].
  * @return Saturation pressure [mbar].
  */
-uint16_t temperature_to_pressure(const int16_t temperature);
+u16 temperature_to_pressure(const s16 temperature);
 
 /**
  * @brief Calculates the gas density, asuming 0°C subheating.
@@ -30,7 +30,7 @@ uint16_t temperature_to_pressure(const int16_t temperature);
  * @param temperature The saturation temperature [0.1°C].
  * @return The gas density [0.1mg/cm3].
  */
-uint16_t gas_density(const int16_t temperature);
+u16 gas_density(const s16 temperature);
 
 /**
  * @brief Calculates the enthalpy difference in the evaporator. 
@@ -39,7 +39,7 @@ uint16_t gas_density(const int16_t temperature);
  * @param cond_temperature The condensation saturation temperature [0.1°C].
  * @return The enthalpy abs difference [100J/0.1g].
  */
-uint16_t evaporation_dH(const int16_t evap_temperature, const int16_t cond_temperature);
+u16 evaporation_dH(const s16 evap_temperature, const s16 cond_temperature);
 
 /**
  * @brief Calculates the enthalpy difference in the condenser.
@@ -48,7 +48,7 @@ uint16_t evaporation_dH(const int16_t evap_temperature, const int16_t cond_tempe
  * @param cond_temperature The condensation saturation temperature [0.1°C].
  * @return The enthalpy abs difference [100J/0.1g].
  */
-uint16_t condensation_dH(const int16_t evap_temperature, const int16_t cond_temperature);
+u16 condensation_dH(const s16 evap_temperature, const s16 cond_temperature);
 
 /**
  * @brief Calculates the mass flow rate of the refrigerant.
@@ -57,7 +57,7 @@ uint16_t condensation_dH(const int16_t evap_temperature, const int16_t cond_temp
  * @param compressor_speed The compressor speed [0.1Hz].
  * @return The mass flow rate [0.1g/s].
  */
-uint16_t calculate_mass_rate(const uint16_t compressor_volume, const uint16_t compressor_speed, const int16_t refrigerant_temperature);
+u16 calculate_mass_rate(const u16 compressor_volume, const u16 compressor_speed, const s16 refrigerant_temperature);
 
 /**
  * @brief Calculates the evaporation power.
@@ -68,7 +68,7 @@ uint16_t calculate_mass_rate(const uint16_t compressor_volume, const uint16_t co
  * @param cond_temperature The condensation saturation temperature [0.1°C].
  * @return The evaporation power [W].
  */
-uint16_t calculate_evaporation_power(const uint16_t compressor_volume, const uint16_t compressor_speed, const int16_t evap_temperature, const int16_t cond_temperature);
+u16 calculate_evaporation_power(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature, const s16 cond_temperature);
 
 /**
  * @brief Calculates the condensation power.
@@ -79,7 +79,7 @@ uint16_t calculate_evaporation_power(const uint16_t compressor_volume, const uin
  * @param cond_temperature The condensation saturation temperature [0.1°C].
  * @return The condensation power [W].
  */
-uint16_t calculate_condensation_power(const uint16_t compressor_volume, const uint16_t compressor_speed, const int16_t evap_temperature, const int16_t cond_temperature);
+u16 calculate_condensation_power(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature, const s16 cond_temperature);
 
 /**
  * @brief Calculates the discharge target temperature.
@@ -88,7 +88,7 @@ uint16_t calculate_condensation_power(const uint16_t compressor_volume, const ui
  * @param cond_temperature The condensation saturation temperature [0.1°C].
  * @return The discharge target temperature [0.1°C].
  */
-int16_t calculate_discharge_target(const int16_t evap_temperature, const int16_t cond_temperature);
+s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temperature);
 
 /**
  * @brief Calculates the overall heat transfer coefficient (UA).
@@ -98,6 +98,6 @@ int16_t calculate_discharge_target(const int16_t evap_temperature, const int16_t
  * @param medium_temperature The medium temperature [0.1°C].
  * @return The overall heat transfer coefficient (UA) [W/0.1°C].
  */
-uint16_t calculate_UA(const uint16_t power, const int16_t refrigerant_temperature, const int16_t medium_temperature);
+u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 medium_temperature);
 
 #endif
