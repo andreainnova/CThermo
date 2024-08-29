@@ -1,8 +1,6 @@
 #include "thermo.h"
 #include "stdtypes.h"
 #include "custom_math.h"
-// #include <stdio.h>
-// #include <stdint.h>
 
 #if REFR_ == REFR_R290
     // static const char refr_name[] = "R290";
@@ -65,14 +63,6 @@
 #error "Unsupported refrigerant type"
 #endif
 
-// Ensure the arrays have the correct size
-// _Static_assert(sizeof(refr_pressures) / sizeof(refr_pressures[0]) == 10, "refr_pressures must have 10 elements");
-// _Static_assert(sizeof(refr_temperatures) / sizeof(refr_temperatures[0]) == 10, "refr_temperatures must have 10 elements");
-
-// void print_refrigerant(void) {
-//     printf("%s\n", refr_name);
-// }
-
 s16 pressure_to_temperature(const u16 pressure) {
     u8 i;
 
@@ -118,21 +108,21 @@ u16 temperature_to_pressure(const s16 temperature) {
     return refr_pressures[9];
 }
 
-u16 gas_density(const s16 evaporation_temperature) {
+u16 gas_density(const s16 evap_temperature) {
     u8 i;
-    if (evaporation_temperature <= refr_temperatures[0]) {
+    if (evap_temperature <= refr_temperatures[0]) {
         return refr_densities[0];
     }
-    if (evaporation_temperature >= refr_temperatures[9]) {
+    if (evap_temperature >= refr_temperatures[9]) {
         return refr_densities[9];
     }
     for (i = 1; i < 10; i++) {
-        if (evaporation_temperature < refr_temperatures[i]) {
+        if (evap_temperature < refr_temperatures[i]) {
             u16 d1 = refr_densities[i - 1];
             u16 d2 = refr_densities[i];
             s16 t1 = refr_temperatures[i - 1];
             s16 t2 = refr_temperatures[i];
-            s16 partial = ((s32)(evaporation_temperature - t1) * (d2 - d1))/(t2 - t1);
+            s16 partial = ((s32)(evap_temperature - t1) * (d2 - d1))/(t2 - t1);
             return d1 + partial;
         }
     }
@@ -158,11 +148,10 @@ u16 condensation_dH(const s16 evap_temperature, const s16 cond_temperature) {
     return dH;
 }
 
-u16 calculate_mass_rate(const u16 compressor_volume, const u16 compressor_speed, const s16 refrigerant_temperature) {
+u16 calculate_mass_rate(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature) {
     s32 volume_rate = min_((s32)compressor_volume * compressor_speed / 100, 65535);
-    // if (volume_rate > 65535) volume_rate = 65535;
 
-    s32 mass_rate = (s32)volume_rate * gas_density(refrigerant_temperature) / 1000;
+    s32 mass_rate = (s32)volume_rate * gas_density(evap_temperature) / 1000;
     if (mass_rate > 65535) return 65535;
     return mass_rate;
 }
@@ -193,8 +182,6 @@ s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temper
 
 u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 medium_temperature) {
     s32 deltaT = abs_(max_(5, refrigerant_temperature - medium_temperature));
-    // deltaT = deltaT < 0 ? -deltaT : deltaT;
-    // deltaT = deltaT < 5 ? 5 : deltaT; // Minimum deltaT is 0.5°C for better stability
     const s32 UA = (s32)power / deltaT;
     if (UA > 65535) return 65535;
     return UA;
