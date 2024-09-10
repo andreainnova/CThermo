@@ -93,7 +93,7 @@ s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temper
  * @param power The power of the system [W].
  * @param refrigerant_temperature The refrigerant temperature [0.1°C].
  * @param medium_temperature The medium temperature [0.1°C].
- * @return The overall heat transfer coefficient (UA) [W/0.1°C].
+ * @return The overall heat transfer coefficient (UA) [W/°C].
  */
 u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 medium_temperature);
 

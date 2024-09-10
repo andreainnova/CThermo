@@ -183,10 +183,10 @@ s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temper
     return disch;
 }
 
+#define MIN_UA_DT (5)
 u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 medium_temperature) {
-    #define MIN_UA_DT 5
     s32 deltaT = max_(MIN_UA_DT, abs_(refrigerant_temperature - medium_temperature));
-    const s32 UA = (s32)power / deltaT;
+    const s32 UA = (s32)power * 10 / deltaT;
     if (UA > 65535) return 65535;
     return UA;
 }
