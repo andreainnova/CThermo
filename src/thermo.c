@@ -173,8 +173,8 @@ u16 calculate_condensation_power(const u16 compressor_volume, const u16 compress
 }
 
 s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temperature) {
-    const s32 evap_corr = ((s32)disch_B * evap_temperature)/10;
-    const s32 cond_corr = ((s32)disch_C * cond_temperature)/10;
+    const s32 evap_corr = ((s32)disch_B * evap_temperature)/100;
+    const s32 cond_corr = ((s32)disch_C * cond_temperature)/100;
     const s32 disch = (s32)disch_A + evap_corr + cond_corr;
     if (disch > 32767) return 32767;
     return disch;
