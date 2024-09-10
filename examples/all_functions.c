@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-    print_refrigerant();
     if (argc < 3) {
         printf("Usage: %s <function> <values>\n", argv[0]);
         return 1;
@@ -69,6 +68,13 @@ int main(int argc, char *argv[]) {
             return 1;
         }
         printf("UA: %d\n", calculate_UA((uint16_t)atoi(argv[2]), (int16_t)atoi(argv[3]), (int16_t)atoi(argv[4])));
+
+    } else if (strcmp(function, "calculate_glycol_mixture_CP") == 0) {
+        if (argc < 3) {
+            printf("Usage: %s calculate_CP <glicole_percentage>\n", argv[0]);
+            return 1;
+        }
+        printf("CP: %d\n", calculate_glycol_mixture_CP((uint16_t)atoi(argv[2])));
 
     } else {
         printf("Function not found\n");

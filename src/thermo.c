@@ -186,3 +186,8 @@ u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 m
     if (UA > 65535) return 65535;
     return UA;
 }
+
+u16 calculate_glycol_mixture_CP(const u16 glycol_percentage) {
+    if (glycol_percentage > 100) return 2450;
+    return 4182 - ((173 * glycol_percentage)/10);
+}

@@ -97,4 +97,11 @@ s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temper
  */
 u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 medium_temperature);
 
+/**
+ * @brief Calculates the CP value of the glycol (both ethylene and propylene) and water mixture.
+ * 
+ * @param glycol_percentage The percentage of glycol in the mixture [1%].
+ * @return The CP value of the mixture [J/kgK].
+ */
+u16 calculate_glycol_mixture_CP(const u16 glycol_percentage);
 #endif

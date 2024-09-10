@@ -21,4 +21,5 @@ env/
 .idea/
 .vscode/
 .venv/
+Makefile
 ```
