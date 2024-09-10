@@ -1,6 +1,9 @@
 #include "thermo.h"
 #include "stdtypes.h"
-#include "custom_math.h"
+
+#define max_(a, b)           ((a) > (b) ? (a) : (b))
+#define min_(a, b)           ((a) < (b) ? (a) : (b))
+#define abs_(val)            ((val) > 0 ? (val) : -(val))
 
 #if REFR_ == REFR_R290
     // static const char refr_name[] = "R290";
@@ -181,7 +184,8 @@ s16 calculate_discharge_target(const s16 evap_temperature, const s16 cond_temper
 }
 
 u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 medium_temperature) {
-    s32 deltaT = abs_(max_(5, refrigerant_temperature - medium_temperature));
+    #define MIN_UA_DT 5
+    s32 deltaT = max_(MIN_UA_DT, abs_(refrigerant_temperature - medium_temperature));
     const s32 UA = (s32)power / deltaT;
     if (UA > 65535) return 65535;
     return UA;
