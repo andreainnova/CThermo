@@ -104,4 +104,12 @@ u16 calculate_UA(const u16 power, const s16 refrigerant_temperature, const s16 m
  * @return The CP value of the mixture [J/kgK].
  */
 u16 calculate_glycol_mixture_CP(const u16 glycol_percentage);
+
+/**
+ * @brief Calculates the atmospheric pressure at a given altitude.
+ * 
+ * @param altitude The altitude between [m].
+ * @return The atmospheric pressure [mbar].
+ */
+u16 calculate_atmospheric_pressure(const u16 altitude);
 #endif

@@ -195,3 +195,8 @@ u16 calculate_glycol_mixture_CP(const u16 glycol_percentage) {
     if (glycol_percentage > 100) return 2450;
     return 4182 - ((173 * glycol_percentage)/10);
 }
+
+u16 calculate_atmospheric_pressure(const u16 altitude) {
+    if (altitude > 5000) return 500;
+    return 1004 - (altitude/10);
+}
