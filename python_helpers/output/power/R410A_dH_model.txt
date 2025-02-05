@@ -3,8 +3,8 @@ Evap Model:                             OLS Regression Results
 Dep. Variable:                dH_evap   R-squared:                       0.993
 Model:                            OLS   Adj. R-squared:                  0.993
 Method:                 Least Squares   F-statistic:                 1.259e+04
-Date:                Thu, 25 Jul 2024   Prob (F-statistic):          4.05e-200
-Time:                        12:15:50   Log-Likelihood:                -1746.9
+Date:                Wed, 05 Feb 2025   Prob (F-statistic):          4.05e-200
+Time:                        09:55:14   Log-Likelihood:                -1746.9
 No. Observations:                 190   AIC:                             3500.
 Df Residuals:                     187   BIC:                             3509.
 Df Model:                           2                                         
@@ -29,8 +29,8 @@ Cond Model:                             OLS Regression Results
 Dep. Variable:                dH_cond   R-squared:                       0.988
 Model:                            OLS   Adj. R-squared:                  0.988
 Method:                 Least Squares   F-statistic:                     7756.
-Date:                Thu, 25 Jul 2024   Prob (F-statistic):          1.27e-180
-Time:                        12:15:50   Log-Likelihood:                -1769.1
+Date:                Wed, 05 Feb 2025   Prob (F-statistic):          1.27e-180
+Time:                        09:55:14   Log-Likelihood:                -1769.1
 No. Observations:                 190   AIC:                             3544.
 Df Residuals:                     187   BIC:                             3554.
 Df Model:                           2                                         
@@ -50,3 +50,29 @@ Kurtosis:                       3.293   Cond. No.                         72.5
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+Comp Model:                                  OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                dH_comp   R-squared (uncentered):                   0.997
+Model:                            OLS   Adj. R-squared (uncentered):              0.997
+Method:                 Least Squares   F-statistic:                          3.369e+04
+Date:                Wed, 05 Feb 2025   Prob (F-statistic):                   5.99e-241
+Time:                        09:55:14   Log-Likelihood:                         -1689.5
+No. Observations:                 190   AIC:                                      3383.
+Df Residuals:                     188   BIC:                                      3389.
+Df Model:                           2                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+T_e        -1176.6960      7.972   -147.597      0.000   -1192.423   -1160.969
+T_c         1047.3327      4.131    253.501      0.000    1039.183    1055.483
+==============================================================================
+Omnibus:                        0.610   Durbin-Watson:                   0.615
+Prob(Omnibus):                  0.737   Jarque-Bera (JB):                0.633
+Skew:                          -0.134   Prob(JB):                        0.729
+Kurtosis:                       2.913   Cond. No.                         2.19
+==============================================================================
+
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.

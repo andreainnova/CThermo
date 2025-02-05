@@ -34,6 +34,13 @@ int main(int argc, char *argv[]) {
         }
         printf("Enthalpy difference: %d\n", condensation_dH((int16_t)atoi(argv[2]), (int16_t)atoi(argv[3])));
 
+    } else if (strcmp(function, "compressor_dH") == 0) {
+        if (argc < 4) {
+            printf("Usage: %s compressor_dH <evap_temperature> <cond_temperature>\n", argv[0]);
+            return 1;
+        }
+        printf("Enthalpy difference: %d\n", compressor_dH((int16_t)atoi(argv[2]), (int16_t)atoi(argv[3])));
+        
     } else if (strcmp(function, "calculate_mass_rate") == 0) {
         if (argc < 5) {
             printf("Usage: %s calculate_mass_rate <compressor_volume> <compressor_speed> <refrigerant_temperature>\n", argv[0]);
@@ -55,6 +62,13 @@ int main(int argc, char *argv[]) {
         }
         printf("Power: %d\n", calculate_condensation_power((uint16_t)atoi(argv[2]), (uint16_t)atoi(argv[3]), (int16_t)atoi(argv[4]), (int16_t)atoi(argv[5])));
 
+    } else if (strcmp(function, "calculate_compressor_power") == 0) {
+        if (argc < 5) {
+            printf("Usage: %s calculate_compressor_power <compressor_volume> <compressor_speed> <evap_temperature> <cond_temperature>\n", argv[0]);
+            return 1;
+        }
+        printf("Power: %d\n", calculate_compressor_power((uint16_t)atoi(argv[2]), (uint16_t)atoi(argv[3]), (int16_t)atoi(argv[4]), (int16_t)atoi(argv[5])));
+        
     } else if (strcmp(function, "calculate_discharge_target") == 0) {
         if (argc < 4) {
             printf("Usage: %s calculate_discharge_target <evap_temperature> <cond_temperature>\n", argv[0]);

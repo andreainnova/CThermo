@@ -47,6 +47,15 @@ u16 evaporation_dH(const s16 evap_temperature, const s16 cond_temperature);
 u16 condensation_dH(const s16 evap_temperature, const s16 cond_temperature);
 
 /**
+ * @brief Calculates the enthalpy difference in the compressor.
+ * 
+ * @param evap_temperature The evaporation saturation temperature [0.1°C].
+ * @param cond_temperature The condensation saturation temperature [0.1°C].
+ * @return The enthalpy abs difference [100J/0.1g].
+ */
+u16 compressor_dH(const s16 evap_temperature, const s16 cond_temperature);
+
+/**
  * @brief Calculates the mass flow rate of the refrigerant.
  * 
  * @param compressor_volume The compressor volume [0.1cm3].
@@ -77,6 +86,17 @@ u16 calculate_evaporation_power(const u16 compressor_volume, const u16 compresso
  * @return The condensation power [W].
  */
 u16 calculate_condensation_power(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature, const s16 cond_temperature);
+
+/**
+ * @brief Calculates the compressor power.
+ * 
+ * @param compressor_volume The compressor volume [0.1cm3].
+ * @param compressor_speed The compressor speed [0.1Hz].
+ * @param evap_temperature The evaporation saturation temperature [0.1°C].
+ * @param cond_temperature The condensation saturation temperature [0.1°C].
+ * @return The compressor power [W].
+ */
+u16 calculate_compressor_power(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature, const s16 cond_temperature);
 
 /**
  * @brief Calculates the discharge target temperature.

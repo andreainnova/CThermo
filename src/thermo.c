@@ -18,6 +18,8 @@
     static const s16 cond_dH_A = 3874; // J/0.1g
     static const s16 cond_dH_B = -752; // J/kg*C
     static const s16 cond_dH_C = -1482; // J/kg*C
+    static const s16 comp_dH_B = -1766; // J/kg*C
+    static const s16 comp_dH_C = 1588; // J/kg*C
 
     // Constants for the discharge target, discharge temperature = A + B*evap_temperature/10 + C*cond_temperature/10
     static const s16 disch_A = 64; // 0.1°C
@@ -37,6 +39,8 @@
     static const s16 cond_dH_A = 3170; // J/0.1g
     static const s16 cond_dH_B = -1698; // J/kg*C
     static const s16 cond_dH_C = -468; // J/kg*C
+    static const s16 comp_dH_B = -1755; // J/kg*C
+    static const s16 comp_dH_C = 1548; // J/kg*C
 
     // Constants for the discharge target, discharge temperature = A + B*evap_temperature/10 + C*cond_temperature/10
     static const s16 disch_A = 75; // 0.1°C
@@ -56,6 +60,8 @@
     static const s16 cond_dH_A = 2230; // J/0.1g
     static const s16 cond_dH_B = -941; // J/kg*C
     static const s16 cond_dH_C = -687; // J/kg*C
+    static const s16 comp_dH_B = -1175; // J/kg*C
+    static const s16 comp_dH_C = 1047; // J/kg*C
 
     // Constants for the discharge target, discharge temperature = A + B*evap_temperature/10 + C*cond_temperature/10
     static const s16 disch_A = 608; // 0.1°C
@@ -151,6 +157,15 @@ u16 condensation_dH(const s16 evap_temperature, const s16 cond_temperature) {
     return dH;
 }
 
+u16 compressor_dH(const s16 evap_temperature, const s16 cond_temperature) {
+    const s32 evap_corr = ((s32)comp_dH_B * evap_temperature) / 1000;
+    const s32 cond_corr = ((s32)comp_dH_C * cond_temperature) / 1000;
+    const s32 dH = evap_corr + cond_corr;
+    if (dH < 0) return 0;
+    if (dH > 65535) return 65535;
+    return dH;
+}
+
 u16 calculate_mass_rate(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature) {
     s32 volume_rate = min_((s32)compressor_volume * compressor_speed / 100, 65535);
 
@@ -170,6 +185,14 @@ u16 calculate_evaporation_power(const u16 compressor_volume, const u16 compresso
 u16 calculate_condensation_power(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature, const s16 cond_temperature) {
     const u16 mass_rate = calculate_mass_rate(compressor_volume, compressor_speed, evap_temperature);
     const u16 dH = condensation_dH(evap_temperature, cond_temperature);
+    const u32 power = (u32)mass_rate * dH / 100;
+    if (power > 65535) return 65535;
+    return power;
+}
+
+u16 calculate_compressor_power(const u16 compressor_volume, const u16 compressor_speed, const s16 evap_temperature, const s16 cond_temperature) {
+    const u16 mass_rate = calculate_mass_rate(compressor_volume, compressor_speed, evap_temperature);
+    const u16 dH = compressor_dH(evap_temperature, cond_temperature);
     const u32 power = (u32)mass_rate * dH / 100;
     if (power > 65535) return 65535;
     return power;
