@@ -7,9 +7,9 @@
 
 #if REFR_ == REFR_R290
     // static const char refr_name[] = "R290";
-    static const u16 refr_pressures[10] = {1111, 2049, 3497, 5606, 8536, 12462, 17569, 24072, 32236, 42512}; // mBar
-    static const s16 refr_temperatures[10] = {-400, -248, -96, 56, 208, 360, 512, 664, 815, 967}; // 0.1°C
-    static const u16 refr_densities[10] = {26, 47, 77, 122, 185, 273, 398, 581, 885, 2205}; // 0.1kg/m^3
+    static const u16 refr_pressures[15] = {1111, 1663, 2404, 3374, 4611, 6159, 8061, 10363, 13114, 16365, 20171, 24596, 29714, 35625, 42512}; // mBar
+    static const s16 refr_temperatures[15] = {-400, -302, -205, -107, -9, 88, 186, 284, 381, 479, 577, 674, 772, 870, 967}; // 0.1°C
+    static const u16 refr_densities[15] = {26, 38, 54, 75, 101, 133, 174, 225, 288, 367, 467, 598, 778, 1058, 2205}; // 0.1kg/m^3
 
     // Constants for the enthalpy of evaporation and condensation, dH = A + B*evap_temperature/10000 + C*cond_temperature/10000
     static const s16 evap_dH_A = 3808; // J/0.1g
@@ -28,9 +28,9 @@
 
 #elif REFR_ == REFR_R32
     // static const char refr_name[] = "R32";
-    static const u16 refr_pressures[10] = {1774, 3105, 5104, 7968, 11912, 17176, 24029, 32782, 43826, 57826}; // mBar
-    static const s16 refr_temperatures[10] = {-400, -269, -138, -6, 125, 256, 387, 519, 650, 781}; // 0.1°C
-    static const u16 refr_densities[10] = {51, 86, 139, 216, 326, 482, 706, 1043, 1610, 4240}; // 0.1kg/m^3
+    static const u16 refr_pressures[15] = {1774, 2562, 3600, 4935, 6621, 8714, 11273, 14363, 18051, 22412, 27527, 33489, 40408, 48428, 57826}; // mBar
+    static const s16 refr_temperatures[15] = {-400, -316, -231, -147, -63, 22, 106, 191, 275, 359, 444, 528, 612, 697, 781}; // 0.1°C
+    static const u16 refr_densities[15] = {51, 72, 99, 135, 180, 237, 308, 397, 509, 651, 833, 1074, 1410, 1939, 4240}; // 0.1kg/m^3
 
     // Constants for the enthalpy of evaporation and condensation
     static const s16 evap_dH_A = 3160; // J/0.1g
@@ -49,9 +49,9 @@
 
 #elif REFR_ == REFR_R410A
     // static const char refr_name[] = "R410A";
-    static const u16 refr_pressures[10] = {1748, 2967, 4756, 7272, 10684, 15182, 20974, 28307, 37490, 49012}; // mBar
-    static const s16 refr_temperatures[10] = {-400, -276, -153, -29, 95, 219, 342, 466, 590, 713}; // 0.1°C
-    static const u16 refr_densities[10] = {70, 116, 183, 278, 413, 600, 868, 1266, 1931, 4605}; // 0.1kg/m^3
+    static const u16 refr_pressures[15] = {1748, 2474, 3413, 4606, 6094, 7921, 10135, 12785, 15925, 19612, 23912, 28897, 34655, 41298, 49012}; // mBar
+    static const s16 refr_temperatures[15] = {-400, -320, -241, -161, -82, -2, 77, 157, 236, 316, 395, 475, 554, 634, 713}; // 0.1°C
+    static const u16 refr_densities[15] = {70, 97, 132, 177, 233, 303, 390, 498, 633, 802, 1018, 1302, 1696, 2317, 4605}; // 0.1kg/m^3
 
     // Constants for the enthalpy of evaporation and condensation
     static const s16 evap_dH_A = 2220; // J/0.1g
@@ -78,10 +78,10 @@ s16 pressure_to_temperature(const u16 pressure) {
     if (pressure <= refr_pressures[0]) {
         return refr_temperatures[0];
     }
-    if (pressure >= refr_pressures[9]) {
-        return refr_temperatures[9];
+    if (pressure >= refr_pressures[14]) {
+        return refr_temperatures[14];
     }
-    for (i = 1; i < 10; i++) {
+    for (i = 1; i < 15; i++) {
         if (pressure < refr_pressures[i]) {
             u16 p1 = refr_pressures[i - 1];
             u16 p2 = refr_pressures[i];
@@ -92,7 +92,7 @@ s16 pressure_to_temperature(const u16 pressure) {
         }
     }
     // Should never reach here if the pressures array is well-defined
-    return refr_temperatures[9];
+    return refr_temperatures[14];
 }
 
 u16 temperature_to_pressure(const s16 temperature) {
@@ -100,10 +100,10 @@ u16 temperature_to_pressure(const s16 temperature) {
     if (temperature <= refr_temperatures[0]) {
         return refr_pressures[0];
     }
-    if (temperature >= refr_temperatures[9]) {
-        return refr_pressures[9];
+    if (temperature >= refr_temperatures[14]) {
+        return refr_pressures[14];
     }
-    for (i = 1; i < 10; i++) {
+    for (i = 1; i < 15; i++) {
         if (temperature < refr_temperatures[i]) {
             u16 p1 = refr_pressures[i - 1];
             u16 p2 = refr_pressures[i];
@@ -114,7 +114,7 @@ u16 temperature_to_pressure(const s16 temperature) {
         }
     }
     // Should never reach here if the temperatures array is well-defined
-    return refr_pressures[9];
+    return refr_pressures[14];
 }
 
 u16 gas_density(const s16 evap_temperature) {
@@ -122,10 +122,10 @@ u16 gas_density(const s16 evap_temperature) {
     if (evap_temperature <= refr_temperatures[0]) {
         return refr_densities[0];
     }
-    if (evap_temperature >= refr_temperatures[9]) {
-        return refr_densities[9];
+    if (evap_temperature >= refr_temperatures[14]) {
+        return refr_densities[14];
     }
-    for (i = 1; i < 10; i++) {
+    for (i = 1; i < 15; i++) {
         if (evap_temperature < refr_temperatures[i]) {
             u16 d1 = refr_densities[i - 1];
             u16 d2 = refr_densities[i];
@@ -136,7 +136,7 @@ u16 gas_density(const s16 evap_temperature) {
         }
     }
     // Should never reach here if the temperatures array is well-defined
-    return refr_densities[9];
+    return refr_densities[14];
 }
 
 u16 evaporation_dH(const s16 evap_temperature, const s16 cond_temperature) {

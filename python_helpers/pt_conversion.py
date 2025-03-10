@@ -19,7 +19,7 @@ def create_points(fluid):
     temperatures = []
     min_temperature = -40
     max_temperature = pf.Fluid(pf.FluidsList[fluid]).critical_temperature
-    for t in np.linspace(min_temperature, max_temperature, 10):
+    for t in np.linspace(min_temperature, max_temperature, 15):
         try:
             p = t2p(t, gas)
         except Exception as e:
